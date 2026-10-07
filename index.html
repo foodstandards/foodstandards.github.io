@@ -830,9 +830,9 @@ if (insInput && suggestionsBox) {
             }
         });
 
-        // Giới hạn hiển thị tối đa 20 dòng gợi ý hàng đầu để tránh làm dài màn hình
+        // Giới hạn hiển thị tối đa 50 dòng gợi ý hàng đầu để tránh làm dài màn hình
         if (uniqueSuggestions.length > 0) {
-            uniqueSuggestions.slice(0, 20).forEach(item => {
+            uniqueSuggestions.slice(0, 50).forEach(item => {
                 const li = document.createElement('li');
                 
                 // Khung HTML số đứng trước tên đứng sau:
@@ -895,8 +895,8 @@ function performSearch() {
     // KIỂM TRA RỖNG: Hiện thông báo "No results found."
     if (filteredResults.length === 0) {
         const noResultMsg = window.currentLanguage === 'en' ? 
-            "💬 No results found." : 
-            "💬 Không tìm thấy kết quả phù hợp.";
+            "💬 No results found. Additive database is in uploading process." : 
+            "💬 Không tìm thấy kết quả phù hợp. Dữ liệu phụ gia đang trong quá trình cập nhật.";
 
         resultContainer.innerHTML = `<div class="message-error" style="color: #8B0032; font-size: 20px; font-weight: bold; margin-top: 40px; text-align: center;">${noResultMsg}</div>`;
         return;
@@ -1227,7 +1227,7 @@ spanEn.addEventListener('click', function() {
     
     // 🌟 DÒNG THÊM MỚI: Tự động tráo dòng chữ cập nhật ngày góc đáy phải sang Tiếng Anh chuyên nghiệp
     if (document.getElementById('footer-update-text')) {
-        document.getElementById('footer-update-text').textContent = "Last Updated 23.09.2026";
+        document.getElementById('footer-update-text').textContent = "Last Updated 07.10.2026";
     }
 
     if (resultContainer && resultContainer.innerHTML !== "") {
@@ -1266,7 +1266,7 @@ spanVi.addEventListener('click', function() {
     
     // 🌟 DÒNG THÊM MỚI: Tự động tráo dòng chữ cập nhật ngày góc đáy phải quay về Tiếng Việt
     if (document.getElementById('footer-update-text')) {
-        document.getElementById('footer-update-text').textContent = "Cập nhật ngày 23.09.2026";
+        document.getElementById('footer-update-text').textContent = "Cập nhật ngày 07.10.2026";
     }
 
     if (resultContainer && resultContainer.innerHTML !== "") {
