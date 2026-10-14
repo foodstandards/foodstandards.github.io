@@ -446,33 +446,11 @@
         <span id="lang-en" style="cursor:pointer;">English</span>
     </div>
     
-
-
-<!-- Hàng dưới: icon con mắt và dải ô số điện tử LED màu xanh lá (Sử dụng mẹo Mặt nạ CSS để chia ô số) -->
-<div class="page-counter" style="margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; font-weight: 500;">
-    👁️ 
-    <!-- Khung bọc tạo chiều sâu chìm xuống và bo góc cho dải đèn LED -->
-    <div style="display: inline-flex; background-color: #2D3748; padding: 2px; border-radius: 4px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.4); position: relative; overflow: hidden; align-items: center; height: 20px;">
-        
-        <!-- 1. GIỮ NGUYÊN ẢNH GỐC CỦA BẠN ĐỂ TỰ ĐỘNG NHẢY SỐ THỰC TẾ -->
-        <img src="https://hits.sh/foodstandards.github.io.svg?theme=odometer&color=38a169&label=%20" alt="Views" style="height: 20px; display: block; vertical-align: middle; filter: contrast(1.15);">
-        
-        <!-- 2. LỚP MẶT NẠ ĐÈN LED RETRO: Tạo vách ngăn sọc dọc cơ học đè lên ảnh -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
-                    background-image: 
-                        /* Cứ mỗi khoảng 9.5px sẽ vẽ 1 vách ngăn dọc màu tối dày 1.5px để phân tách các con số */
-                        linear-gradient(90deg, transparent 8px, #203529 8px, #203529 9.5px),
-                        /* Hiệu ứng gờ bóng đổ mờ sọc ngang đặc trưng của dòng bảng số retro */
-                        linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 45%, rgba(0,0,0,0.2) 100%);
-                    background-size: 9.5px 100%, 100% 100%;
-                    border-top: 1px solid rgba(255,255,255,0.15);
-                    border-bottom: 1px solid rgba(0,0,0,0.25);">
-        </div>
+    <!-- Hàng dưới: icon con mắt và dải ô số điện tử LED màu xanh lá-->
+    <div class="page-counter" style="margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; font-weight: 500;">
+        👁️ <img src="https://hits.sh/foodstandards.github.io.svg?theme=odometer&color=38a169&label=%20" alt="Views" style="height: 20px; vertical-align: middle; filter: contrast(1.15);">
     </div>
 </div>
-
-
-
     
     <!-- Phần Header hoàn thiện -->
     <div class="header-container">
