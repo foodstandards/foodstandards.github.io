@@ -837,9 +837,15 @@ if (insInput && suggestionsBox) {
             }
         });
 
-        // Giới hạn hiển thị tối đa 50 dòng gợi ý hàng đầu để tránh làm dài màn hình
+        // Giới hạn hiển thị tối đa 100 dòng gợi ý hàng đầu để tránh làm dài màn hình
         if (uniqueSuggestions.length > 0) {
-            uniqueSuggestions.slice(0, 50).forEach(item => {
+            
+            // 🌟 ĐS SỬA: Thêm thuật toán sắp xếp Alphabet theo mã INS trước khi cắt slice
+            uniqueSuggestions.sort((a, b) => {
+                return a.ins.localeCompare(b.ins, undefined, { numeric: true, sensitivity: 'base' });
+            });
+
+            uniqueSuggestions.slice(0, 100).forEach(item => {
                 const li = document.createElement('li');
                 
                 // Khung HTML số đứng trước tên đứng sau:
