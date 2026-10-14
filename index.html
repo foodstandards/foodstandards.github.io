@@ -352,7 +352,7 @@
     display: block;
 }
 
-/* ĐÃ TỐI ƯU CÂN ĐỐI TRỤC: Khớp tăm tắp lề chữ của disclaimer-box */
+/* Khớp lề chữ của disclaimer-box */
 .footer-container {
     width: 100%; /* Ép khung chiếm trọn vẹn chiều rộng có sẵn */
     margin: 0; 
@@ -747,7 +747,7 @@
                     if (vi !== "") lastVi = vi; else vi = lastVi;
                     if (en !== "") lastEn = en; else en = lastEn;
 
-                    // Đọc chính xác tuyệt đối theo các tên cột
+                    // Đọc chính xác theo các tên cột
                     return {
                         ins: ins,
                         vietnamese_name: vi,
@@ -756,19 +756,19 @@
                         ml: item.ml !== undefined ? String(item.ml).trim() : "",
                         note: item.note !== undefined ? String(item.note).trim() : "",
                         
-                        // Cặp cột Chức năng mới
+                        // Cặp cột Chức năng
                         function_vi: item.function_vi !== undefined ? String(item.function_vi).trim() : "",
                         function_en: item.function_en !== undefined ? String(item.function_en).trim() : "",
                         
-                        // Cặp cột Nhóm thực phẩm mới
+                        // Cặp cột Nhóm thực phẩm
                         cat_name_vi: item.cat_name_vi !== undefined ? String(item.cat_name_vi).trim() : "",
                         cat_name_en: item.cat_name_en !== undefined ? String(item.cat_name_en).trim() : "",
                         
-                        // Cặp cột Giải thích ghi chú mới
+                        // Cặp cột Giải thích ghi chú
                         note_text_vi: item.note_text_vi !== undefined ? String(item.note_text_vi).trim() : "",
                         note_text_en: item.note_text_en !== undefined ? String(item.note_text_en).trim() : "",
                         
-                        // Cặp cột Nguồn tài liệu mới
+                        // Cặp cột Nguồn tài liệu
                         source_vi: item.source_vi !== undefined ? String(item.source_vi).trim() : "",
                         source_en: item.source_en !== undefined ? String(item.source_en).trim() : ""
                     };
@@ -810,22 +810,29 @@ if (insInput && suggestionsBox) {
 
         // Quét dữ liệu từ file Excel đã nạp sẵn trong dataDatabase
         dataDatabase.forEach(item => {
-            const viName = item.vietnamese_name ? String(item.vietnamese_name) : "";
-            const enName = item.english_name ? String(item.english_name) : "";
-            const insCode = item.ins ? String(item.ins) : "";
+            // Chuyển tất cả về chữ thường để so sánh chuẩn xác với startsWith
+            const viName = item.vietnamese_name ? String(item.vietnamese_name).toLowerCase() : "";
+            const enName = item.english_name ? String(item.english_name).toLowerCase() : "";
+            const insCode = item.ins ? String(item.ins).toLowerCase() : "";
 
-            const isMatch = isNaN(query) ? 
-                (viName.toLowerCase().startsWith(query) || enName.toLowerCase().startsWith(query)) :
-                insCode.toLowerCase().startsWith(query);
+            // ĐÃ SỬA: Loại bỏ hoàn toàn isNaN(query) gây lỗi chặn tìm mã INS có chữ
+            // Ép hệ thống kiểm tra bắt đầu bằng (startsWith) đồng thời cho cả INS và Tên
+            const isMatch = insCode.startsWith(query) || 
+                            viName.startsWith(query) || 
+                            enName.startsWith(query);
 
             if (isMatch) {
-                // TỰ ĐỘNG TRÁO TÊN GỢI Ý: Giao diện Tiếng Anh hiện tên Anh, Tiếng Việt hiện tên Việt
-                const displayName = currentLanguage === 'en' ? (enName || viName) : viName;
+                // TỰ ĐỘNG TRÁO TÊN GỢI Ý: Lấy lại dữ liệu gốc từ item để hiển thị đúng chữ Hoa/Thường ban đầu
+                const displayName = currentLanguage === 'en' ? 
+                    (item.english_name || item.vietnamese_name) : item.vietnamese_name;
+                
+                // Giữ lại mã INS gốc để đưa vào danh sách gợi ý
+                const rawInsCode = item.ins ? String(item.ins) : "";
 
                 // Kiểm tra chống trùng lặp dựa trên tên hiển thị thực tế
                 if (!seenNames.has(displayName.toLowerCase())) {
                     seenNames.add(displayName.toLowerCase());
-                    uniqueSuggestions.push({ name: displayName, ins: insCode });
+                    uniqueSuggestions.push({ name: displayName, ins: rawInsCode });
                 }
             }
         });
