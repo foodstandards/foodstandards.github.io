@@ -5,12 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Food Standards Database</title>
 	<link rel="icon" type="image/png" href="favicon.png">
-    <!-- Link nhúng font chữ Inter từ Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    	<!-- Link nhúng font chữ Inter từ Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 	<!-- Sử dụng link dự phòng cdnjs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 	<style>
         /* Khung bao quanh trang */
         body {
@@ -62,7 +62,7 @@
             color: #E2E8F0;
         }
 
-        /* Khung Header chuẩn tỉ lệ vàng */
+        /* Khung Header */
         .header-container {
             display: flex;
             align-items: center;        
@@ -107,7 +107,7 @@
             gap: 6px;                 
         }
 
-        /* Tiêu đề tiếng Việt màu đen */
+        /* Tiêu đề tiếng Việt */
         .database-title .vi-text {
             color: #1A202C;        
             font-weight: 700;       
@@ -115,7 +115,7 @@
             line-height: 1.2;         
         }
 
-        /* Tiêu đề tiếng Anh màu xanh lá cây */
+        /* Tiêu đề tiếng Anh */
         .database-title .en-text {
             color: #38A169;       
             font-weight: 600;       
@@ -129,13 +129,13 @@
             margin-top: 24px;
         }
 
-        /* Chữ chỉ dẫn ban đầu */
+        /* Chữ chỉ dẫn */
         .search-container p {
             margin-top: 0; 
             margin-bottom: 10px;
         }
 
-        /* Tạo flexbox cố định dòng nhập liệu */
+        /* Flexbox cố định dòng nhập liệu */
         .search-form-group {
             display: flex;
             align-items: center;
@@ -143,7 +143,7 @@
             max-width: 540px;
         }
 
-        /* Ô tìm kiếm bo góc vừa vặn hiện đại */
+        /* Ô tìm kiếm */
         .search-box {
             height: 46px; 
             box-sizing: border-box;
@@ -161,7 +161,7 @@
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Hiệu ứng Focus phát sáng nhẹ nhàng theo tông hồng trầm */
+        /* Hiệu ứng Focus */
         .search-box:focus {
             border-color: #CE4A7E; 
             box-shadow: 0 0 0 3px rgba(206, 74, 126, 0.15); 
@@ -170,12 +170,11 @@
         .search-box::placeholder {
             color: #A0AEC0;
         }
-
-        /* Tông màu hồng đỏ trầm (Muted Berry/Rose) sang trọng, không gắt mắt */
+        
         .search-btn {
             height: 46px; 
             box-sizing: border-box;
-            background: linear-gradient(180deg, #CE4A7E 0%, #B33665 100%); /* Hồng đỏ vỏ đỗ siêu sang */
+            background: linear-gradient(180deg, #CE4A7E 0%, #B33665 100%); 
             border: none;                   
             border-radius: 8px; 
             padding: 0 28px;           
@@ -192,7 +191,7 @@
             transition: all 0.2s ease;
         }
 
-        /* Hiệu ứng hover mềm mại tinh tế */
+        /* Hiệu ứng hover */
         .search-btn:hover {
             background: linear-gradient(180deg, #B33665 0%, #942650 100%);
             transform: translateY(-1px); 
@@ -206,7 +205,7 @@
             box-shadow: 0 2px 6px rgba(179, 54, 101, 0.15);
         }
 
-        /* Đường phân cách thanh lịch */
+        /* Đường phân cách */
         hr {
             border: 0; 
             border-top: 1px solid #E2E8F0; 
@@ -219,20 +218,20 @@
                 padding: 16px; 
             }
 
-            /* Ép thanh chọn ngôn ngữ và dải số đèn LED căn giữa dọc tuyệt đối trên mobile */
+            /* Ép thanh chọn ngôn ngữ và dải số đèn LED căn giữa dọc trên mobile */
             .language-switcher {
-                position: static !important; /* Hủy bỏ nép góc phải absolute trên mobile */
+                position: static !important; 
                 display: flex !important;
-                flex-direction: column !important; /* Dòng chữ ở trên, đèn LED ở dưới */
-                align-items: center !important;    /* Căn giữa tăm tắp theo chiều dọc */
+                flex-direction: column !important; 
+                align-items: center !important;    
                 justify-content: center !important;
                 margin-bottom: 24px;
                 margin-top: 5px;
-                gap: 8px;                    /* Tạo khoảng cách nhỏ vừa vặn giữa 2 dòng */
+                gap: 8px;                    
                 width: 100% !important;
             }
 
-            /* Đảm bảo ô con mắt và đèn LED cũng tự động căn giữa, không bị lệch */
+            /* Ô con mắt và đèn LED căn giữa */
             .page-counter {
                 display: inline-flex !important;
                 align-items: center !important;
@@ -241,7 +240,7 @@
                 text-align: center !important;
             }
 
-            /* Chuyển đổi toàn bộ Header sang dạng căn giữa dọc */
+            /* Header căn giữa */
             .header-container {
                 flex-direction: column; 
                 align-items: center;
@@ -278,7 +277,7 @@
                 max-width: 100%;
             }
         }
-/* Định dạng phong cách cho từng dòng gợi ý đổ xuống */
+/* Định dạng cho từng dòng gợi ý đổ xuống */
 #suggestions-box li {
     padding: 10px 16px;
     font-size: 14.5px;
@@ -290,7 +289,7 @@
     align-items: center;
 }
 
-/* Đổi màu hồng nhạt berry khi rê chuột vào dòng gợi ý giống nút tra cứu của bạn */
+/* Đổi màu hồng nhạt berry khi rê chuột vào dòng gợi ý */
 #suggestions-box li:hover {
     background-color: #FFF5F7;
     color: #B33665;
@@ -312,13 +311,13 @@
     /* Đảm bảo kích thước ô không bị méo khi thêm padding */
     box-sizing: border-box; 
 }
-/* Khóa chết kích thước chữ của toàn bộ bảng, cấm trình duyệt tự co giãn */
+/* Khóa kích thước chữ của toàn bộ bảng, cấm trình duyệt tự co giãn */
 .result-table td, 
 .result-table th {
-    /* 🛠️ BỔ SUNG DÒNG NÀY: Ép kích thước chữ cố định là 14px cho toàn bảng */
+    /* 🛠️ Ép kích thước chữ cố định là 14px cho toàn bảng */
     font-size: 14px !important;
     
-    /* 🛠️ BỔ SUNG DÒNG NÀY: Giúp độ giãn cách các dòng chữ đều nhau, không bị lệch phông */
+    /* 🛠️ Giúp độ giãn cách các dòng chữ đều nhau, không bị lệch phông */
     line-height: 1.5 !important; 
     
     -webkit-text-size-adjust: 100% !important; /* Dành cho trình duyệt Safari/iPhone */
@@ -342,7 +341,7 @@
     bottom: 15px;   
     right: 20px;     
     width: 140px;    
-    opacity: 0.06;   /* Tạo độ mờ 6% ẩn hiện chìm sâu tinh tế, không làm rối chữ */
+    opacity: 0.06;   /* Tạo độ mờ 6% ẩn hiện */
     pointer-events: none; 
     user-select: none;
     z-index: 1;
@@ -356,7 +355,7 @@
 
 /* Khớp lề chữ của disclaimer-box */
 .footer-container {
-    width: 100%; /* Ép khung chiếm trọn vẹn chiều rộng có sẵn */
+    width: 100%; 
     margin: 0; 
     display: flex;
     justify-content: space-between;
@@ -366,7 +365,7 @@
     position: relative;
     z-index: 2; 
     
-    /* Chỉ giữ lại padding-left 20px (bằng khít thụt lề chữ hộp trên), xóa bỏ margin-left gây lệch hàng */
+    /* Padding-left 20px (bằng khít thụt lề chữ hộp trên) */
     padding-left: 20px !important;
     padding-right: 20px !important;
     margin-left: 0px !important;
@@ -392,7 +391,7 @@
 .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
 
 .footer-links a {
-    color: #B33665; /* Đồng bộ màu hồng cánh sen thương hiệu của bạn */
+    color: #B33665; 
     text-decoration: none;
     font-size: 13px;
     font-weight: 500;
@@ -430,8 +429,8 @@
 </head>
 <body>
     
-    <!-- Cụm chọn ngôn ngữ kết hợp đếm lượt xem ĐÈN LED RETRO (Đường link ẩn chữ hits) -->
-<div class="language-switcher" style="position: absolute; top: 24px; right: 24px; display: flex; flex-direction: column; align-items: flex-end; font-size: 13px; color: #718096; z-index: 10;">
+    <!-- Cụm chọn ngôn ngữ kết hợp đếm lượt xem (Đường link ẩn chữ hits) -->
+	<div class="language-switcher" style="position: absolute; top: 24px; right: 24px; display: flex; flex-direction: column; align-items: flex-end; font-size: 13px; color: #718096; z-index: 10;">
     <!-- Hàng trên: Giữ nguyên thanh chọn ngôn ngữ hiện tại của bạn -->
     <div>
         <span class="lang-icon" style="margin-right: 6px; display: inline-block; color: #38A169; vertical-align: -0.12em;">
@@ -452,7 +451,7 @@
     </div>
 </div>
     
-    <!-- Phần Header hoàn thiện -->
+    <!-- Phần Header -->
     <div class="header-container">
         <div class="logo-box">
             <a href="/">
@@ -483,7 +482,7 @@
         <button class="search-btn" id="search-btn-text">Tra cứu</button>
     </div>
 </div>
-    <!-- Hộp Disclaimer  nằm ngay dưới thanh tìm kiếm -->
+    <!-- Hộp Disclaimer -->
     <div class="disclaimer-box">
         <div class="disclaimer-title">
             <!-- Icon info (i) chuẩn nét mảnh tinh tế -->
@@ -501,33 +500,25 @@
     </div>
 
     <style>
-        /* Định dạng hộp Disclaimer nổi khối tràn viền e */
+        /* Định dạng hộp Disclaimer */
    .disclaimer-box {
-            /* Màu nền xám rêu/xanh sage nhạt (Warm Sage) - tăng cả độ ấm và sắc xanh lá */
             background-color: #F1EFEA; 
-            
-            border: none;              /* Xóa bỏ hoàn toàn viền cứng để hết bẹt phẳng */
+            border: none;              
             border-radius: 6px;        
             padding: 16px 20px;
-            margin-top: 40px;         /* Khoảng cách vừa vặn với thanh tìm kiếm phía trên */
+            margin-top: 40px;         
             margin-bottom: 24px;
             width: 100%;
-            max-width: 100%;          /* Chiều rộng bằng khít với ô tìm kiếm */
+            max-width: 100%;          
             box-sizing: border-box;
-            
-            /* ĐÃ SỬA: Đổ bóng mờ pha sắc xanh rêu nhẹ để định hình khối tinh tế, nịnh mắt */
             box-shadow: 0 6px 16px 0 rgba(100, 116, 89, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
-            
-            /* Tạo hiệu ứng chuyển động mượt mà khi di chuột */
             transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
 
         /* Hiệu ứng nhích nhẹ khi di chuột qua */
         .disclaimer-box:hover {
             transform: translateY(-1px);
-            /* ĐÃ SỬA: Nền chuyển sang màu xám xanh lá đậm hơn, ấm áp khi hover */
             background-color: #DDE5D5; 
-            /* ĐỔI BÓNG HOVER: Tăng độ sâu bóng đổ để tạo độ nổi khối tự nhiên */
             box-shadow: 0 10px 20px 0 rgba(100, 116, 89, 0.1), 0 2px 6px 0 rgba(0, 0, 0, 0.03);
         }
         .disclaimer-title {
@@ -578,18 +569,16 @@
     font-size: 14px;
 }
 
-/* Bộ nút xuất dữ liệu Excel/PDF */
+/* Nút xuất dữ liệu Excel */
 .export-buttons {
     margin-bottom: 20px;
 }
 
-/* Nâng cấp nút Xuất file: Nền hồng nhạt Gradient, BỎ VIỀN hoàn toàn */
 .btn-export {
-    border: none; /* Bỏ viền cam/hồng cũ */
-    /* Hiệu ứng chuyển sắc Gradient tông hồng nhạt dịu mắt */
+    border: none;
     background: linear-gradient(180deg, #FCE7F3 0%, #FBCFE8 100%); 
-    color: #B33665; /* Giữ màu chữ hồng đậm hoa sen để dễ đọc */
-    padding: 10px 18px; /* Tăng nhẹ độ dày để nút bấm trông mướt hơn */
+    color: #B33665; 
+    padding: 10px 18px; 
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
@@ -598,14 +587,14 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    box-shadow: 0 2px 4px rgba(179, 54, 101, 0.08); /* Đổ bóng mờ siêu nhẹ tạo độ nổi nhẹ */
+    box-shadow: 0 2px 4px rgba(179, 54, 101, 0.08); 
     transition: all 0.2s ease;
 }
 
 /* Hiệu ứng tương tác mượt mà khi di chuột vào nút */
 .btn-export:hover {
-    background: linear-gradient(180deg, #FBCFE8 0%, #F9A8D4 100%); /* Hồng đậm hơn một chút khi hover */
-    transform: translateY(-1px); /* Nhấc nhẹ nút lên tạo cảm giác nổi */
+    background: linear-gradient(180deg, #FBCFE8 0%, #F9A8D4 100%); 
+    transform: translateY(-1px); 
     box-shadow: 0 4px 8px rgba(179, 54, 101, 0.15);
 }
 
@@ -641,12 +630,12 @@
 
 /* Thanh tiêu đề màu XANH ĐẬM */
 .result-table th {
-    background: linear-gradient(180deg, #1E5631 0%, #143B21 100%); /* Xanh lá cây sẫm đổ màu chuyển sắc */
+    background: linear-gradient(180deg, #1E5631 0%, #143B21 100%); 
     color: #ffffff;
     padding: 14px 12px;
     font-weight: 600;
     white-space: normal;
-    border-bottom: 2px solid #0D2615; /* Viền dưới tối hẳn để khóa khối bảng */
+    border-bottom: 2px solid #0D2615; 
     vertical-align: middle; 
 }
 
@@ -659,7 +648,7 @@
 }
 
 .result-table tr:hover {
-    background-color: #F7FAFC; /* Hiệu ứng đổi màu nhẹ khi rê chuột qua hàng */
+    background-color: #F7FAFC; 
 }
 
 /* Định dạng cột số ML cho nổi bật */
@@ -887,7 +876,7 @@ function performSearch() {
 
     const keyword = insInput.value.trim().toLowerCase();
     
-    // KIỂM TRA TRỐNG: Hiện câu thông báo lỗi chuẩn theo tiếng Anh viết tay của bạn
+    // KIỂM TRA TRỐNG: Hiện câu thông báo lỗi chuẩn theo tiếng Anh  
     if (keyword === "") {
         const errorMsg = window.currentLanguage === 'en' ? 
             "💬 Please fill in the INS number or additive name into the search box." : 
@@ -942,7 +931,7 @@ function performSearch() {
     // Dòng lệnh tính toán số phụ gia duy nhất sau khi gộp
     const uniqueAdditivesCount = new Set(filteredResults.map(item => String(item.ins).trim().toLowerCase())).size;
     
-    // Đổ toàn bộ giao diện mới vào vùng chứa (Cột ML giữ nguyên cứng theo ý bạn chốt)
+    // Đổ toàn bộ giao diện mới vào vùng chứa 
     resultContainer.innerHTML = `
         <div class="results-wrapper">
             <h2 class="results-title">${window.currentLanguage === 'en' ? 'Results' : 'Kết quả'}</h2>
@@ -1008,8 +997,7 @@ function mergeTableCells() {
     // Mốc đối chiếu cố định: Lấy toàn bộ các ô thuộc cột INS làm căn cứ
     const insCells = document.querySelectorAll(`#result-table-body .col-ins`);
 
-    // 2. 🌟 THUẬT TOÁN ĐẶC BIỆT 1: Gộp cột Tên (Việt, Anh) và Chức năng dựa theo MÃ INS trùng nhau
-    // Điều này giúp ngăn chặn dữ liệu bị gộp tràn hàng chéo nhau giữa các chất khác nhau
+    // 2. 🌟 THUẬT TOÁN 1: Gộp cột Tên (Việt, Anh) và Chức năng dựa theo MÃ INS trùng nhau
     const dependentColumns = ['.col-viName', '.col-enName', '.col-func'];
     
     dependentColumns.forEach(colClass => {
@@ -1038,7 +1026,7 @@ function mergeTableCells() {
         });
     });
 
-    // 3. 🌟 THUẬT TOÁN ĐẶC BIỆT 2: Chỉ gộp cột ML nếu nội dung ML trùng và MÃ NHÓM THỰC PHẨM cũng phải trùng
+    // 3. 🌟 THUẬT TOÁN 2: Chỉ gộp cột ML nếu nội dung ML trùng và MÃ NHÓM THỰC PHẨM trùng
     const mlCells = document.querySelectorAll(`#result-table-body .col-ml`);
     const catNameCells = document.querySelectorAll(`#result-table-body .col-catName`);
     let mainMlCell = null;
