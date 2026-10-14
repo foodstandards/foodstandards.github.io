@@ -1025,25 +1025,25 @@ function mergeTableCells() {
 
     // 3. 🌟 THUẬT TOÁN ĐẶC BIỆT 2: Chỉ gộp cột ML nếu nội dung ML trùng và MÃ NHÓM THỰC PHẨM cũng phải trùng
     const mlCells = document.querySelectorAll(`#result-table-body .col-ml`);
-    const catNoCells = document.querySelectorAll(`#result-table-body .col-catNo`);
+    const catNameCells = document.querySelectorAll(`#result-table-body .col-catName`);
     let mainMlCell = null;
-    let mainCatNoText = ""; 
+    let mainCatNameText = ""; 
 
     mlCells.forEach((cell, index) => {
         const currentMlText = cell.textContent.trim();
-        const currentCatNoText = catNoCells[index].textContent.trim(); 
+        const currentCatNameText = catNameCells[index].textContent.trim(); 
 
         if (!mainMlCell) {
             mainMlCell = cell;
             mainMlCell.rowSpan = 1;
-            mainCatNoText = currentCatNoText;
-        } else if (currentMlText === mainMlCell.textContent.trim() && currentCatNoText === mainCatNoText && currentMlText !== "") {
+            mainCatNameText = currentCatNameText;
+        } else if (currentMlText === mainMlCell.textContent.trim() && currentCatNameText === mainCatNameText && currentMlText !== "") {
             mainMlCell.rowSpan += 1;
             cell.style.display = 'none';
         } else {
             mainMlCell = cell;
             mainMlCell.rowSpan = 1;
-            mainCatNoText = currentCatNoText; 
+            mainCatNameText = currentCatNameText; 
         }
     });
 }
