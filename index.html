@@ -1274,7 +1274,7 @@ spanVi.addEventListener('click', function() {
     // Tự động dịch phần chân trang Footer quay lại Tiếng Việt
     if (document.getElementById('footer-brand-text')) document.getElementById('footer-brand-text').textContent = "Liên hệ";
     
-    // 🌟 DÒNG THÊM MỚI: Tự động tráo dòng chữ cập nhật ngày góc đáy phải quay về Tiếng Việt
+    // 🌟 Tự động tráo dòng chữ cập nhật ngày góc đáy phải quay về Tiếng Việt
     if (document.getElementById('footer-update-text')) {
         document.getElementById('footer-update-text').textContent = "Cập nhật ngày 07.10.2026";
     }
@@ -1285,7 +1285,7 @@ spanVi.addEventListener('click', function() {
 });
 }
 </script>
-<!-- CỤM CHÂN TRANG FOOTER NỀN SÁNG - TỐI GIẢN CHỈ GIỮ LẠI LIÊN HỆ VÀ ICON -->
+<!-- CỤM CHÂN TRANG FOOTER -->
 <footer class="site-footer">
     <!-- Khối Banner Hoa Sen Chìm Đằng Sau (Tự động bốc ảnh logo.png làm mờ) -->
     <div class="footer-lotus-watermark">
@@ -1293,11 +1293,11 @@ spanVi.addEventListener('click', function() {
     </div>
 
     <div class="footer-container">
-        <!-- Khối bên trái: Chứa chữ Liên hệ và DÀN ICON nằm ngay phía dưới -->
+        <!-- Khối bên trái: Chứa chữ Liên hệ và DÀN ICON -->
         <div class="footer-left" style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
             <div class="footer-brand" id="footer-brand-text">Liên hệ</div>
             
-            <!-- Dàn icon mạng xã hội nằm gọn gàng bên lề trái -->
+            <!-- Dàn icon mạng xã hội  -->
             <div class="footer-socials" style="display: flex; gap: 14px; font-size: 18px; margin-top: 4px;">
                 <a href="mailto:vmchau86@gmail.com" aria-label="Gmail" style="display: inline-flex; align-items: center; text-decoration: none;">
         <img src="gmailicon.png" alt="Gmail" style="width: 20px; height: auto; display: block;" onerror="this.src='https://placehold.co'">
@@ -1314,7 +1314,7 @@ spanVi.addEventListener('click', function() {
             </div>
         </div>
 
-        <!-- Khối bên phải: Đã bỏ trống hoàn toàn để giao diện thông thoáng, thanh lịch -->
+        <!-- Khối bên phải -->
         <div class="footer-right" id="footer-update-text">Cập nhật ngày 07.10.2026</div>
     </div>
 </footer>
