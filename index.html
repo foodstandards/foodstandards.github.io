@@ -1081,8 +1081,8 @@ function mergeTableCells() {
             return;
         }
 
-        // Khai báo các biến ghi nhớ dòng trên để đối chiếu dữ liệu dòng dưới
-        let lastIns = "", lastVi = "", lastEn = "", lastFunc = "", lastCatNo = "", lastMl = "";
+        // Khai báo các biến ghi nhớ dòng trên để đối chiếu dữ liệu dòng dưới (ĐÃ THÊM lastCatName)
+        let lastIns = "", lastVi = "", lastEn = "", lastFunc = "", lastCatNo = "", lastCatName = "", lastMl = "";
 
         // 2. Chuyển đổi dữ liệu và TỰ ĐỘNG XÓA CHỮ lặp thông minh kết hợp ĐỔI CỘT NGÔN NGỮ
         const excelRows = exportData.map(item => {
@@ -1122,11 +1122,18 @@ function mergeTableCells() {
             }
 
             // Quy tắc 3: Xóa trùng cho cột Mã nhóm và cột Nhóm thực phẩm (Đặt ở dưới cùng để không làm nhiễu Quy tắc 2)
-            if (currentCatNo === lastCatNo && currentCatNo !== "") {
-                displayCatNo = "";
-                displayCatName = "";
+            
+            // Bước A: Kiểm tra điều kiện đồng thời trùng khít cho cả Mã nhóm và Tên nhóm
+            const isGroupDuplicate = (currentCatNo === lastCatNo && currentCatName === lastCatName && currentCatNo !== "" && currentCatName !== "");
+
+            // Bước B: Tiến hành xóa trùng dựa trên kết quả đối chiếu thô ở Bước A
+            if (isGroupDuplicate) {
+                displayCatNo = "";   // Xóa trùng Mã nhóm
+                displayCatName = ""; // Xóa trùng Nhóm thực phẩm
             } else {
+                // Nếu có bất kỳ sự thay đổi nào (Mã mới HOẶC Tên nhóm mới), cập nhật lại cả 2 biến ghi nhớ
                 lastCatNo = currentCatNo;
+                lastCatName = currentCatName;
             }
 
             // Trả về tiêu đề hàng tiếng Anh hoặc tiếng Việt chuẩn chỉnh đồng bộ theo nút bấm
