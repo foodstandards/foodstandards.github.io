@@ -1126,15 +1126,15 @@ function mergeTableCells() {
             // Bước A: Kiểm tra điều kiện đồng thời trùng khít cho cả Mã nhóm và Tên nhóm
             const isGroupDuplicate = (currentCatNo === lastCatNo && currentCatName === lastCatName && currentCatNo !== "" && currentCatName !== "");
 
-            // Bước B: Tiến hành xóa trùng dựa trên kết quả đối chiếu thô ở Bước A
+            // Bước B: Tiến hành xóa trùng nếu thỏa mãn điều kiện
             if (isGroupDuplicate) {
                 displayCatNo = "";   // Xóa trùng Mã nhóm
                 displayCatName = ""; // Xóa trùng Nhóm thực phẩm
-            } else {
-                // Nếu có bất kỳ sự thay đổi nào (Mã mới HOẶC Tên nhóm mới), cập nhật lại cả 2 biến ghi nhớ
-                lastCatNo = currentCatNo;
-                lastCatName = currentCatName;
             }
+
+            // Bước C: LUÔN LUÔN cập nhật lại biến ghi nhớ để dòng sau đối chiếu với đúng dòng ngay trước nó
+            lastCatNo = currentCatNo;
+            lastCatName = currentCatName;
 
             // Trả về tiêu đề hàng tiếng Anh hoặc tiếng Việt chuẩn chỉnh đồng bộ theo nút bấm
             if (window.currentLanguage === "en") {
