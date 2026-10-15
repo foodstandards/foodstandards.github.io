@@ -969,11 +969,11 @@ function performSearch() {
     }
 
   // =========================================================================
- // 4. THUẬT TOÁN CHẠY NGẦM TỰ ĐỘNG GỘP Ô TRÙNG NHAU THEO RÀNG BUỘC LOGIC
+// 4. THUẬT TOÁN CHẠY NGẦM TỰ ĐỘNG GỘP Ô TRÙNG NHAU THEO RÀNG BUỘC LOGIC (ĐÃ SỬA)
 // =========================================================================
 function mergeTableCells() {
-    // 1. Nhóm các cột gộp độc lập bình thường (Chỉ giữ lại INS và các cột Mã nhóm, Tên nhóm thực phẩm)
-    const normalColumns = ['.col-ins', '.col-catNo', '.col-catName'];
+    // 1. Nhóm các cột gộp độc lập bình thường (ĐÃ SỬA: Chỉ còn giữ lại cột INS)
+    const normalColumns = ['.col-ins'];
     
     normalColumns.forEach(colClass => {
         const cells = document.querySelectorAll(`#result-table-body ${colClass}`);
@@ -1026,9 +1026,49 @@ function mergeTableCells() {
         });
     });
 
-    // 3. 🌟 THUẬT TOÁN 2: Chỉ gộp cột ML nếu nội dung ML trùng và MÃ NHÓM THỰC PHẨM trùng
-    const mlCells = document.querySelectorAll(`#result-table-body .col-ml`);
+    // 3. 🌟 THUẬT TOÁN ĐÃ SỬA: Gộp song song cặp bài trùng Mã nhóm & Nhóm thực phẩm
+    const catNoCells = document.querySelectorAll(`#result-table-body .col-catNo`);
     const catNameCells = document.querySelectorAll(`#result-table-body .col-catName`);
+    
+    let mainCatNoCell = null;
+    let mainCatNameCell = null;
+    let lastCatNoText = "";
+    let lastCatNameText = "";
+
+    catNoCells.forEach((cell, index) => {
+        const currentCatNoText = cell.textContent.trim();
+        const currentCatNameText = catNameCells[index].textContent.trim();
+
+        // Kiểm tra điều kiện gộp: Cả 2 cùng trùng với dòng mốc và không được rỗng
+        const isGroupDuplicate = (currentCatNoText === lastCatNoText && currentCatNameText === lastCatNameText && currentCatNoText !== "" && currentCatNameText !== "");
+
+        if (!mainCatNoCell || !mainCatNameCell) {
+            // Khởi tạo dòng mốc đầu tiên
+            mainCatNoCell = cell;
+            mainCatNameCell = catNameCells[index];
+            mainCatNoCell.rowSpan = 1;
+            mainCatNameCell.rowSpan = 1;
+            lastCatNoText = currentCatNoText;
+            lastCatNameText = currentCatNameText;
+        } else if (isGroupDuplicate) {
+            // Nếu thỏa mãn trùng cả cặp: Tăng rowSpan và ẩn ô hiện tại đi
+            mainCatNoCell.rowSpan += 1;
+            mainCatNameCell.rowSpan += 1;
+            cell.style.display = 'none';
+            catNameCells[index].style.display = 'none';
+        } else {
+            // Khi có bất kỳ một trong hai giá trị thay đổi -> Đặt lại dòng mốc mới
+            mainCatNoCell = cell;
+            mainCatNameCell = catNameCells[index];
+            mainCatNoCell.rowSpan = 1;
+            mainCatNameCell.rowSpan = 1;
+            lastCatNoText = currentCatNoText;
+            lastCatNameText = currentCatNameText;
+        }
+    });
+
+    // 4. 🌟 THUẬT TOÁN 2: Chỉ gộp cột ML nếu nội dung ML trùng và NHÓM THỰC PHẨM trùng
+    const mlCells = document.querySelectorAll(`#result-table-body .col-ml`);
     let mainMlCell = null;
     let mainCatNameText = ""; 
 
